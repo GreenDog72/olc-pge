@@ -1,10 +1,11 @@
 [package]
 name = "olc-pge"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["GreenDog72"]
 description = "A reimplementation of the olcPixelGameEngine in Rust"
 license = "OLC-3"
 license-file = "LICENSE.md"
+repository = "https://github.com/GreenDog72/olc-pge"
 documentation = "https://docs.rs/olc-pge"
 edition = "2018"
 
