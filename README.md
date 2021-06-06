@@ -94,7 +94,7 @@ fn draw_line_pattern(&mut self, x1: i32, y1: i32, x2: i32, y2: i32, p: Pixel, pa
 fn draw_line_v(&mut self, pos1: Vi2d, pos2: Vi2d, p: Pixel);
 fn draw_line_pattern_v(&mut self, pos1: Vi2d, pos2: Vi2d, p: Pixel, pattern: u32);
 ```
-Isn't it just grand?
+Isn't it just grand? I made the decision to make the color mandatory. I think most of the time you would be specifying it anyway, so it doesn't feel like a downgrade.
 
 ### Sprites
 
