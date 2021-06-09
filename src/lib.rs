@@ -575,6 +575,9 @@ impl PixelGameEngine {
         if let Some((_, y)) = self.window.get_scroll_wheel() {
             self.mouse_wheel_delta = y as i32;
         }
+        else {
+            self.mouse_wheel_delta = 0;
+        }
     }
 
     fn _update_window(&mut self) -> minifb::Result<()> {
