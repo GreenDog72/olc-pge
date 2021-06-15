@@ -1,6 +1,6 @@
 [package]
 name = "olc-pge"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["GreenDog72"]
 description = "A reimplementation of the olcPixelGameEngine in Rust"
 license-file = "LICENSE.md"
