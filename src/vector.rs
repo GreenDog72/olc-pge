@@ -3,7 +3,7 @@ use std::ops::{
     AddAssign, SubAssign, MulAssign, DivAssign
 };
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct V2d<T> {
     pub x: T,
     pub y: T
@@ -171,3 +171,12 @@ impl<T: Div<Output = T> + Copy> DivAssign<T> for V2d<T> {
         }
     }
 }
+
+impl From<Vf2d> for Vi2d { fn from(value: Vf2d) -> Vi2d { Vi2d { x: value.x as i32, y: value.y as i32 } } }
+impl From<Vd2d> for Vi2d { fn from(value: Vd2d) -> Vi2d { Vi2d { x: value.x as i32, y: value.y as i32 } } }
+
+impl From<Vi2d> for Vf2d { fn from(value: Vi2d) -> Vf2d { Vf2d { x: value.x as f32, y: value.y as f32 } } }
+impl From<Vd2d> for Vf2d { fn from(value: Vd2d) -> Vf2d { Vf2d { x: value.x as f32, y: value.y as f32 } } }
+
+impl From<Vi2d> for Vd2d { fn from(value: Vi2d) -> Vd2d { Vd2d { x: value.x as f64, y: value.y as f64 } } }
+impl From<Vf2d> for Vd2d { fn from(value: Vf2d) -> Vd2d { Vd2d { x: value.x as f64, y: value.y as f64 } } }

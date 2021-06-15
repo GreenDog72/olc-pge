@@ -309,7 +309,7 @@ impl PixelGameEngine {
         let mut d = 3 - 2 * r;
 
         let mut draw_line = |sx: i32, ex: i32, ny: i32| {
-            for i in sx..ex {
+            for i in sx..=ex {
                 self.draw(i, ny, p);
             }
         };
