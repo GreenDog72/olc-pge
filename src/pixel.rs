@@ -5,11 +5,11 @@ pub struct Pixel {
 
 impl Pixel {
     pub fn rgb(r: u8, g: u8, b: u8) -> Self {
-        Pixel { a: 255, r: r, g: g, b: b }
+        Pixel { a: 255, r, g, b }
     }
 
     pub fn rgba(r: u8, g: u8, b: u8, a: u8) -> Self {
-        Pixel { a: a, r: r, g: g, b: b }
+        Pixel { a, r, g, b }
     }
 }
 

@@ -132,7 +132,7 @@ impl PixelGameEngine {
     pub fn set_pixel_mode(&mut self, mode: PixelMode) { self.pixel_mode = mode; }
     pub fn get_pixel_mode(&self) -> PixelMode { self.pixel_mode }
     pub fn set_pixel_blend(&mut self, blend: f32) { self.blend_factor = blend; }
-    pub fn set_sub_pixel_offset(&mut self, _ox: f32, _oy: f32) { /* unimplemented!() */ }
+    pub fn set_sub_pixel_offset(&mut self, _ox: f32, _oy: f32) { unimplemented!() }
 
     pub fn draw(&mut self, x: i32, y: i32, p: Pixel) -> bool { self._draw(x, y, p) }
     pub fn draw_v(&mut self, pos: Vi2d, p: Pixel) -> bool { self._draw(pos.x, pos.y, p) }
@@ -183,7 +183,7 @@ impl PixelGameEngine {
     pub fn draw_string_scaled_v(&mut self, pos: Vi2d, text: &String, col: Pixel, scale: u32) { self._draw_string_scaled(pos.x, pos.y, text, col, scale); }
 
     pub fn clear(&mut self, p: Pixel) { self._clear(p); }
-    pub fn set_screen_size(&mut self, _w: usize, _h: usize) { /* unimplemented!() */ }
+    pub fn set_screen_size(&mut self, _w: usize, _h: usize) { unimplemented!() }
 
     // implementations
 
@@ -203,8 +203,8 @@ impl PixelGameEngine {
                 draw_target.set_pixel(x, y, Pixel::rgb(r as u8, g as u8, b as u8))
             }
             PixelMode::Custom => {
-                //unimplemented!()
-                draw_target.set_pixel(x, y, p)
+                unimplemented!()
+                //draw_target.set_pixel(x, y, p)
             }
         }
     }
@@ -217,7 +217,7 @@ impl PixelGameEngine {
         let mut pattern = pattern;
 
         let mut rol = || -> bool {
-            pattern = (pattern << 1) | (pattern >> 31);
+            pattern = pattern.rotate_left(1);
             pattern & 1 != 0
         };
 
@@ -355,7 +355,7 @@ impl PixelGameEngine {
     }
 
     #[inline]
-    // http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
+    // algorithm from http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
     fn _fill_triangle(&mut self, x1: i32, y1: i32, x2: i32, y2: i32, x3: i32, y3: i32, p: Pixel) {
         let (v1, mut v2, v3) =
             if y1 < y2 {
