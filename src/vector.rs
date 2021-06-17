@@ -112,6 +112,26 @@ impl<T: Add<Output = T> + Copy> AddAssign for V2d<T> {
     }
 }
 
+impl<T: Add<Output = T>> Add<(T, T)> for V2d<T> {
+    type Output = Self;
+
+    fn add(self, other: (T, T)) -> Self {
+        Self {
+            x: self.x + other.0,
+            y: self.y + other.1
+        }
+    }
+}
+
+impl<T: Add<Output = T> + Copy> AddAssign<(T, T)> for V2d<T> {
+    fn add_assign(&mut self, other: (T, T)) {
+        *self = Self {
+            x: self.x + other.0,
+            y: self.y + other.1
+        }
+    }
+}
+
 impl<T: Sub<Output = T>> Sub for V2d<T> {
     type Output = Self;
 
@@ -128,6 +148,26 @@ impl<T: Sub<Output = T> + Copy> SubAssign for V2d<T> {
         *self = Self {
             x: self.x - other.x,
             y: self.y - other.y
+        }
+    }
+}
+
+impl<T: Sub<Output = T>> Sub<(T, T)> for V2d<T> {
+    type Output = Self;
+
+    fn sub(self, other: (T, T)) -> Self {
+        Self {
+            x: self.x - other.0,
+            y: self.y - other.1
+        }
+    }
+}
+
+impl<T: Sub<Output = T> + Copy> SubAssign<(T, T)> for V2d<T> {
+    fn sub_assign(&mut self, other: (T, T)) {
+        *self = Self {
+            x: self.x - other.0,
+            y: self.y - other.1
         }
     }
 }
@@ -180,3 +220,15 @@ impl From<Vd2d> for Vf2d { fn from(value: Vd2d) -> Vf2d { Vf2d { x: value.x as f
 
 impl From<Vi2d> for Vd2d { fn from(value: Vi2d) -> Vd2d { Vd2d { x: value.x as f64, y: value.y as f64 } } }
 impl From<Vf2d> for Vd2d { fn from(value: Vf2d) -> Vd2d { Vd2d { x: value.x as f64, y: value.y as f64 } } }
+
+impl<T> From<(T, T)> for V2d<T> {
+    fn from(value: (T, T)) -> Self {
+        Self { x: value.0, y: value.1 }
+    }
+}
+
+impl<T> From<V2d<T>> for (T, T) {
+    fn from(value: V2d<T>) -> Self {
+        (value.x, value.y)
+    }
+}

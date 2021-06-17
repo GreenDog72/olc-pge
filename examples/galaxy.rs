@@ -120,9 +120,9 @@ pub struct Galaxy {
 
 impl Default for Galaxy {
     fn default() -> Self { Self {
-        galaxy_offset: olc::Vf2d::new(0.0, 0.0),
+        galaxy_offset: (0.0, 0.0).into(),
         star_selected: false,
-        star_selected_pos: olc::Vi2d::new(0, 0),
+        star_selected_pos: (0, 0).into(),
     } }
 }
 
@@ -141,11 +141,12 @@ impl olc::PGEApplication for Galaxy {
         let sectors_y = pge.screen_height() / 16;
 
         let mouse = olc::Vi2d::new(pge.get_mouse_x() / 16, pge.get_mouse_y() / 16);
-        let galaxy_mouse = mouse + self.galaxy_offset.into();
+        let galaxy_mouse = mouse + olc::Vi2d::from(self.galaxy_offset);
 
         for x in 0..sectors_x as u32 {
             for y in 0..sectors_y as u32 {
-                let star = StarSystem::new(x + self.galaxy_offset.x as u32, y + self.galaxy_offset.y as u32, false);
+                let pos = self.galaxy_offset + (x as f32, y as f32);
+                let star = StarSystem::new(pos.x as u32, pos.y as u32, false);
 
                 if star.star_exists {
                     pge.fill_circle(x as i32 * 16 + 8, y as i32 * 16 + 8,
